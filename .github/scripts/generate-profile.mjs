@@ -9,8 +9,8 @@ import path from "node:path";
 const ORG = process.env.GH_ORG || "meshmy";
 const TOKEN = process.env.GITHUB_TOKEN;
 const API = "https://api.github.com";
-const YEAR_MS = 365 * 24 * 60 * 60 * 1000;
-const WEEKS = 52;
+const DAY_MS = 24 * 60 * 60 * 1000;
+const GRID_WEEKS = 53;
 const MAX_COMMIT_PAGES = 5; // per repo cap, keeps API usage bounded
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -95,71 +95,121 @@ function engagementScore(repo) {
   );
 }
 
-function bucketWeekly(allDates, now) {
-  const buckets = new Array(WEEKS).fill(0);
+// Builds a GitHub-style contribution grid: gridStart is the Sunday that
+// begins the oldest full week, so day index i (0 = gridStart) always maps
+// to column i/7, row i%7 with row 0 = Sunday.
+function buildGrid(allDates) {
+  const today = new Date();
+  const endDate = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+  const dow = endDate.getUTCDay(); // 0 = Sunday
+  const gridStart = new Date(endDate.getTime() - (GRID_WEEKS - 1) * 7 * DAY_MS - dow * DAY_MS);
+  const totalDays = Math.round((endDate.getTime() - gridStart.getTime()) / DAY_MS) + 1;
+
+  const counts = new Array(totalDays).fill(0);
   for (const iso of allDates) {
-    const ageMs = now - new Date(iso).getTime();
-    const weekIdx = Math.floor(ageMs / (7 * 24 * 60 * 60 * 1000));
-    if (weekIdx >= 0 && weekIdx < WEEKS) {
-      buckets[weekIdx] += 1;
-    }
+    const dayIdx = Math.floor((new Date(iso).getTime() - gridStart.getTime()) / DAY_MS);
+    if (dayIdx >= 0 && dayIdx < totalDays) counts[dayIdx] += 1;
   }
-  return buckets.reverse(); // oldest -> newest, left to right
+
+  return { gridStart, totalDays, counts };
 }
 
 const THEMES = {
-  dark: { bg: "#0d1117", border: "#30363d", text: "#c9d1d9", subtext: "#8b949e", bar: "#58a6ff", grid: "#21262d" },
-  light: { bg: "#ffffff", border: "#d0d7de", text: "#24292f", subtext: "#57606a", bar: "#0969da", grid: "#eaeef2" },
+  dark: {
+    bg: "#0d1117",
+    border: "#30363d",
+    text: "#c9d1d9",
+    subtext: "#8b949e",
+    levels: ["#161b22", "#123661", "#1a4f8c", "#2a72c4", "#58a6ff"],
+  },
+  light: {
+    bg: "#ffffff",
+    border: "#d0d7de",
+    text: "#24292f",
+    subtext: "#57606a",
+    levels: ["#ebedf0", "#c9dcf5", "#9dc2f0", "#5aa0e8", "#0969da"],
+  },
 };
 
-function renderChartSVG(themeName, weeklyCounts, totalCommits) {
+function levelFor(count, maxCount) {
+  if (count === 0) return 0;
+  if (maxCount <= 1) return 4;
+  return Math.min(4, Math.max(1, Math.ceil((count / maxCount) * 4)));
+}
+
+function renderChartSVG(themeName, grid, totalCommits) {
   const theme = THEMES[themeName];
-  const width = 760;
-  const height = 260;
-  const padding = { top: 56, right: 24, bottom: 36, left: 24 };
-  const chartW = width - padding.left - padding.right;
-  const chartH = height - padding.top - padding.bottom;
-  const maxCount = Math.max(1, ...weeklyCounts);
-  const barGap = 2;
-  const barW = chartW / WEEKS - barGap;
+  const { gridStart, totalDays, counts } = grid;
+  const maxCount = Math.max(1, ...counts);
 
-  const now = new Date();
-  const bars = weeklyCounts
-    .map((count, i) => {
-      const barH = count === 0 ? 2 : Math.max(4, (count / maxCount) * chartH);
-      const x = padding.left + i * (chartW / WEEKS);
-      const y = padding.top + chartH - barH;
-      const weeksAgo = WEEKS - 1 - i;
-      const weekDate = new Date(now.getTime() - weeksAgo * 7 * 24 * 60 * 60 * 1000);
-      const title = `${weekDate.toISOString().slice(0, 10)}: ${count} commit${count === 1 ? "" : "s"}`;
-      return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${barH.toFixed(1)}" rx="1.5" fill="${theme.bar}" fill-opacity="${count === 0 ? 0.25 : 0.9}"><title>${title}</title></rect>`;
-    })
-    .join("");
+  const cell = 10;
+  const gap = 3;
+  const pitch = cell + gap;
+  const padding = { top: 74, right: 24, bottom: 20, left: 24 };
+  const dayLabelWidth = 26;
+  const gridOriginX = padding.left + dayLabelWidth;
+  const gridOriginY = padding.top;
 
-  // Month tick labels every ~4 weeks, skipping immediate repeats of the same month
-  const ticks = [];
-  let lastLabel = null;
-  for (let i = 0; i < WEEKS; i += 4) {
-    const weeksAgo = WEEKS - 1 - i;
-    const weekDate = new Date(now.getTime() - weeksAgo * 7 * 24 * 60 * 60 * 1000);
-    const x = padding.left + i * (chartW / WEEKS);
-    const label = weekDate.toLocaleString("en-US", { month: "short" });
-    if (label === lastLabel) continue;
-    lastLabel = label;
-    ticks.push(
-      `<text x="${x.toFixed(1)}" y="${height - 12}" font-size="11" fill="${theme.subtext}" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">${label}</text>`
+  const width = gridOriginX + GRID_WEEKS * pitch - gap + padding.right;
+  const height = gridOriginY + 7 * pitch - gap + padding.bottom;
+
+  const cells = [];
+  let lastMonthLabel = null;
+  const monthLabels = [];
+  for (let day = 0; day < totalDays; day++) {
+    const week = Math.floor(day / 7);
+    const row = day % 7;
+    const date = new Date(gridStart.getTime() + day * DAY_MS);
+    const count = counts[day];
+    const level = levelFor(count, maxCount);
+    const x = gridOriginX + week * pitch;
+    const y = gridOriginY + row * pitch;
+    const dateLabel = date.toISOString().slice(0, 10);
+    cells.push(
+      `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${cell}" height="${cell}" rx="2" fill="${theme.levels[level]}"><title>${dateLabel}: ${count} commit${count === 1 ? "" : "s"}</title></rect>`
     );
+
+    if (row === 0) {
+      const monthLabel = date.toLocaleString("en-US", { month: "short" });
+      if (monthLabel !== lastMonthLabel) {
+        lastMonthLabel = monthLabel;
+        monthLabels.push(
+          `<text x="${x.toFixed(1)}" y="${gridOriginY - 8}" font-size="11" fill="${theme.subtext}" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">${monthLabel}</text>`
+        );
+      }
+    }
   }
 
-  const baselineY = padding.top + chartH;
+  const dayLabels = [
+    { row: 1, label: "Mon" },
+    { row: 3, label: "Wed" },
+    { row: 5, label: "Fri" },
+  ]
+    .map(
+      ({ row, label }) =>
+        `<text x="${(padding.left + dayLabelWidth - 6).toFixed(1)}" y="${(gridOriginY + row * pitch + cell - 1).toFixed(1)}" font-size="10" fill="${theme.subtext}" text-anchor="end" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">${label}</text>`
+    )
+    .join("\n  ");
 
-  return `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="meshmy organization commit activity, last 52 weeks">
+  const legendX = width - padding.right - 5 * (cell + 2) - 40;
+  const legendY = 34;
+  const legend = theme.levels
+    .map(
+      (color, i) =>
+        `<rect x="${(legendX + i * (cell + 2)).toFixed(1)}" y="${legendY}" width="${cell}" height="${cell}" rx="2" fill="${color}" />`
+    )
+    .join("");
+
+  return `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="meshmy organization commit activity, last ${GRID_WEEKS} weeks">
   <rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="12" fill="${theme.bg}" stroke="${theme.border}" />
   <text x="24" y="34" font-size="16" font-weight="600" fill="${theme.text}" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">meshmy Organization Activity</text>
-  <text x="24" y="52" font-size="12" fill="${theme.subtext}" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">${totalCommits} commits by org members in the last ${WEEKS} weeks</text>
-  <line x1="${padding.left}" y1="${baselineY}" x2="${width - padding.right}" y2="${baselineY}" stroke="${theme.grid}" stroke-width="1" />
-  ${bars}
-  ${ticks.join("\n  ")}
+  <text x="24" y="56" font-size="12" fill="${theme.subtext}" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">${totalCommits} commits by org members in the last ${GRID_WEEKS} weeks</text>
+  <text x="${(legendX - 6).toFixed(1)}" y="${legendY + cell - 1}" font-size="10" fill="${theme.subtext}" text-anchor="end" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">Less</text>
+  ${legend}
+  <text x="${(legendX + 5 * (cell + 2) + 6).toFixed(1)}" y="${legendY + cell - 1}" font-size="10" fill="${theme.subtext}" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">More</text>
+  ${monthLabels.join("\n  ")}
+  ${dayLabels}
+  ${cells.join("\n  ")}
 </svg>
 `;
 }
@@ -209,8 +259,8 @@ function injectSection(content, marker, body) {
 }
 
 async function main() {
-  const now = Date.now();
-  const sinceISO = new Date(now - YEAR_MS).toISOString();
+  // Fetch enough history to cover the full grid (53 weeks) plus a few days' slack.
+  const sinceISO = new Date(Date.now() - (GRID_WEEKS * 7 + 7) * DAY_MS).toISOString();
 
   const [repos, memberLogins] = await Promise.all([fetchOrgRepos(), fetchOrgMembers()]);
 
@@ -227,18 +277,18 @@ async function main() {
     .slice(0, 5);
   const topRepos = [...repos].sort((a, b) => b._engagement - a._engagement).slice(0, 5);
 
-  const weeklyCounts = bucketWeekly(allOrgCommitDates, now);
+  const grid = buildGrid(allOrgCommitDates);
   const totalCommits = allOrgCommitDates.length;
 
-  await writeFile(path.join(PROFILE_DIR, "activity-graph-dark.svg"), renderChartSVG("dark", weeklyCounts, totalCommits));
-  await writeFile(path.join(PROFILE_DIR, "activity-graph-light.svg"), renderChartSVG("light", weeklyCounts, totalCommits));
+  await writeFile(path.join(PROFILE_DIR, "activity-graph-dark.svg"), renderChartSVG("dark", grid, totalCommits));
+  await writeFile(path.join(PROFILE_DIR, "activity-graph-light.svg"), renderChartSVG("light", grid, totalCommits));
 
   const readmePath = path.join(PROFILE_DIR, "README.md");
   let readme = await readFile(readmePath, "utf8");
   readme = injectSection(readme, "REPOS", renderRepoTable(recentRepos, topRepos));
   await writeFile(readmePath, readme);
 
-  console.log(`Updated profile for ${repos.length} repos, ${totalCommits} org-authored commits in last ${WEEKS} weeks.`);
+  console.log(`Updated profile for ${repos.length} repos, ${totalCommits} org-authored commits in last ${GRID_WEEKS} weeks.`);
 }
 
 main().catch((err) => {
