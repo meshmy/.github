@@ -30,11 +30,11 @@
     <td valign="top" width="50%">
       <h3>🕒 Recently Active</h3>
       <ol>
+        <li><a href="https://github.com/meshmy/meshmy.github.io"><b>meshmy.github.io</b></a><br /><sub>The MeshMY community website</sub><br /><sub>last org activity: 2026-07-21</sub></li>
+        <li><a href="https://github.com/meshmy/weissberger-calculator"><b>weissberger-calculator</b></a><br /><sub>Estimate usable radio link distance through foliage with Weissberger&#39;s MED model</sub><br /><sub>last org activity: 2026-07-21</sub></li>
         <li><a href="https://github.com/meshmy/tool-stm32flash"><b>tool-stm32flash</b></a><br /><sub>Open, buildable recipe reproducing PlatformIO&#39;s tool-stm32flash package from public upstream source</sub><br /><sub>last org activity: 2026-07-16</sub></li>
-        <li><a href="https://github.com/meshmy/meshmy.github.io"><b>meshmy.github.io</b></a><br /><sub>The MeshMY community website</sub><br /><sub>last org activity: 2026-07-16</sub></li>
         <li><a href="https://github.com/meshmy/.github"><b>.github</b></a><br /><sub><i>no description</i></sub><br /><sub>last org activity: 2026-07-16</sub></li>
         <li><a href="https://github.com/meshmy/jungle-buoy"><b>jungle-buoy</b></a><br /><sub>Jungle Buoy solar buoy PCB replacement</sub><br /><sub>last org activity: 2026-07-13</sub></li>
-        <li><a href="https://github.com/meshmy/meshtastic-firmware"><b>meshtastic-firmware</b></a><br /><sub>Meshtastic device firmware</sub><br /><sub>last org activity: 2026-05-01</sub></li>
       </ol>
     </td>
     <td valign="top" width="50%">
