@@ -1,7 +1,7 @@
 <svg width="760" height="182" viewBox="0 0 760 182" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="meshmy organization commit activity, last 53 weeks">
   <rect x="0.5" y="0.5" width="759" height="181" rx="12" fill="#0d1117" stroke="#30363d" />
   <text x="24" y="34" font-size="16" font-weight="600" fill="#c9d1d9" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">meshmy Organization Activity</text>
-  <text x="24" y="56" font-size="12" fill="#8b949e" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">77 commits by org members in the last 53 weeks</text>
+  <text x="24" y="56" font-size="12" fill="#8b949e" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">80 commits by org members in the last 53 weeks</text>
   <text x="630.0" y="43" font-size="10" fill="#8b949e" text-anchor="end" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">Less</text>
   <rect x="636.0" y="34" width="10" height="10" rx="2" fill="#161b22" /><rect x="648.0" y="34" width="10" height="10" rx="2" fill="#123661" /><rect x="660.0" y="34" width="10" height="10" rx="2" fill="#1a4f8c" /><rect x="672.0" y="34" width="10" height="10" rx="2" fill="#2a72c4" /><rect x="684.0" y="34" width="10" height="10" rx="2" fill="#58a6ff" />
   <text x="702.0" y="43" font-size="10" fill="#8b949e" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">More</text>
@@ -387,5 +387,6 @@
   <rect x="713.0" y="152.0" width="10" height="10" rx="2" fill="#161b22"><title>2026-07-18: 0 commits</title></rect>
   <rect x="726.0" y="74.0" width="10" height="10" rx="2" fill="#161b22"><title>2026-07-19: 0 commits</title></rect>
   <rect x="726.0" y="87.0" width="10" height="10" rx="2" fill="#161b22"><title>2026-07-20: 0 commits</title></rect>
-  <rect x="726.0" y="100.0" width="10" height="10" rx="2" fill="#1a4f8c"><title>2026-07-21: 4 commits</title></rect>
+  <rect x="726.0" y="100.0" width="10" height="10" rx="2" fill="#2a72c4"><title>2026-07-21: 7 commits</title></rect>
+  <rect x="726.0" y="113.0" width="10" height="10" rx="2" fill="#161b22"><title>2026-07-22: 0 commits</title></rect>
 </svg>
