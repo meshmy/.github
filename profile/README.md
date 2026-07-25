@@ -41,7 +41,7 @@
       <h3>🔥 Top by Engagement</h3>
       <ol>
         <li><a href="https://github.com/meshmy/meshtastic-config-my-sg"><b>meshtastic-config-my-sg</b></a><br /><sub>Meshtastic Configuration for Malaysia and Singapore</sub><br /><sub>engagement score: 9</sub></li>
-        <li><a href="https://github.com/meshmy/meshtastic-firmware"><b>meshtastic-firmware</b></a><br /><sub>Meshtastic device firmware</sub><br /><sub>engagement score: 2</sub></li>
+        <li><a href="https://github.com/meshmy/meshtastic-firmware"><b>meshtastic-firmware</b></a><br /><sub>Meshtastic device firmware</sub><br /><sub>engagement score: 4</sub></li>
         <li><a href="https://github.com/meshmy/russell"><b>russell</b></a><br /><sub>Russell is a board designed to mount on an ER34615/IFR32700 cell and go Up! on a balloon</sub><br /><sub>engagement score: 2</sub></li>
         <li><a href="https://github.com/meshmy/device-ui"><b>device-ui</b></a><br /><sub>meshtastic device-ui library</sub><br /><sub>engagement score: 2</sub></li>
         <li><a href="https://github.com/meshmy/tdeck-maps"><b>tdeck-maps</b></a><br /><sub><i>no description</i></sub><br /><sub>engagement score: 1</sub></li>
