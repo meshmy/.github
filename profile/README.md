@@ -30,7 +30,7 @@
     <td valign="top" width="50%">
       <h3>🕒 Recently Active</h3>
       <ol>
-        <li><a href="https://github.com/meshmy/meshatlas"><b>meshatlas</b></a><br /><sub><i>no description</i></sub><br /><sub>last org activity: 2026-07-27</sub></li>
+        <li><a href="https://github.com/meshmy/meshatlas"><b>meshatlas</b></a><br /><sub><i>no description</i></sub><br /><sub>last org activity: 2026-07-29</sub></li>
         <li><a href="https://github.com/meshmy/meshmy.github.io"><b>meshmy.github.io</b></a><br /><sub>The MeshMY community website</sub><br /><sub>last org activity: 2026-07-21</sub></li>
         <li><a href="https://github.com/meshmy/weissberger-calculator"><b>weissberger-calculator</b></a><br /><sub>Estimate usable radio link distance through foliage with Weissberger&#39;s MED model</sub><br /><sub>last org activity: 2026-07-21</sub></li>
         <li><a href="https://github.com/meshmy/tool-stm32flash"><b>tool-stm32flash</b></a><br /><sub>Open, buildable recipe reproducing PlatformIO&#39;s tool-stm32flash package from public upstream source</sub><br /><sub>last org activity: 2026-07-16</sub></li>
