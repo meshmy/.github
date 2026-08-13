@@ -30,9 +30,9 @@
     <td valign="top" width="50%">
       <h3>🕒 Recently Active</h3>
       <ol>
+        <li><a href="https://github.com/meshmy/meshtastic-firmware"><b>meshtastic-firmware</b></a><br /><sub>Meshtastic device firmware</sub><br /><sub>last org activity: 2026-08-12</sub></li>
         <li><a href="https://github.com/meshmy/meshtastic-protobufs"><b>meshtastic-protobufs</b></a><br /><sub>Protobuf definitions for the Meshtastic project</sub><br /><sub>last org activity: 2026-08-08</sub></li>
         <li><a href="https://github.com/meshmy/meshatlas"><b>meshatlas</b></a><br /><sub><i>no description</i></sub><br /><sub>last org activity: 2026-07-29</sub></li>
-        <li><a href="https://github.com/meshmy/meshtastic-firmware"><b>meshtastic-firmware</b></a><br /><sub>Meshtastic device firmware</sub><br /><sub>last org activity: 2026-07-25</sub></li>
         <li><a href="https://github.com/meshmy/meshmy.github.io"><b>meshmy.github.io</b></a><br /><sub>The MeshMY community website</sub><br /><sub>last org activity: 2026-07-21</sub></li>
         <li><a href="https://github.com/meshmy/weissberger-calculator"><b>weissberger-calculator</b></a><br /><sub>Estimate usable radio link distance through foliage with Weissberger&#39;s MED model</sub><br /><sub>last org activity: 2026-07-21</sub></li>
       </ol>
