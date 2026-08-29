@@ -30,18 +30,18 @@
     <td valign="top" width="50%">
       <h3>🕒 Recently Active</h3>
       <ol>
+        <li><a href="https://github.com/meshmy/meshtastic-web-flasher"><b>meshtastic-web-flasher</b></a><br /><sub>Official online flasher for Meshtastic device firmware</sub><br /><sub>last org activity: 2026-08-29</sub></li>
         <li><a href="https://github.com/meshmy/radiosondetastic"><b>radiosondetastic</b></a><br /><sub>we need a better name</sub><br /><sub>last org activity: 2026-08-23</sub></li>
-        <li><a href="https://github.com/meshmy/meshtastic-firmware"><b>meshtastic-firmware</b></a><br /><sub>Meshtastic device firmware</sub><br /><sub>last org activity: 2026-08-12</sub></li>
+        <li><a href="https://github.com/meshmy/meshtastic-firmware"><b>meshtastic-firmware</b></a><br /><sub>Meshtastic device firmware</sub><br /><sub>last org activity: 2026-08-19</sub></li>
         <li><a href="https://github.com/meshmy/meshtastic-protobufs"><b>meshtastic-protobufs</b></a><br /><sub>Protobuf definitions for the Meshtastic project</sub><br /><sub>last org activity: 2026-08-08</sub></li>
         <li><a href="https://github.com/meshmy/meshatlas"><b>meshatlas</b></a><br /><sub><i>no description</i></sub><br /><sub>last org activity: 2026-07-29</sub></li>
-        <li><a href="https://github.com/meshmy/meshmy.github.io"><b>meshmy.github.io</b></a><br /><sub>The MeshMY community website</sub><br /><sub>last org activity: 2026-07-21</sub></li>
       </ol>
     </td>
     <td valign="top" width="50%">
       <h3>🔥 Top by Engagement</h3>
       <ol>
         <li><a href="https://github.com/meshmy/meshtastic-config-my-sg"><b>meshtastic-config-my-sg</b></a><br /><sub>Meshtastic Configuration for Malaysia and Singapore</sub><br /><sub>engagement score: 9</sub></li>
-        <li><a href="https://github.com/meshmy/meshtastic-firmware"><b>meshtastic-firmware</b></a><br /><sub>Meshtastic device firmware</sub><br /><sub>engagement score: 5</sub></li>
+        <li><a href="https://github.com/meshmy/meshtastic-firmware"><b>meshtastic-firmware</b></a><br /><sub>Meshtastic device firmware</sub><br /><sub>engagement score: 4</sub></li>
         <li><a href="https://github.com/meshmy/radiosondetastic"><b>radiosondetastic</b></a><br /><sub>we need a better name</sub><br /><sub>engagement score: 4</sub></li>
         <li><a href="https://github.com/meshmy/russell"><b>russell</b></a><br /><sub>Russell is a board designed to mount on an ER34615/IFR32700 cell and go Up! on a balloon</sub><br /><sub>engagement score: 2</sub></li>
         <li><a href="https://github.com/meshmy/device-ui"><b>device-ui</b></a><br /><sub>meshtastic device-ui library</sub><br /><sub>engagement score: 2</sub></li>
