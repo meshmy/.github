@@ -30,7 +30,7 @@
     <td valign="top" width="50%">
       <h3>🕒 Recently Active</h3>
       <ol>
-        <li><a href="https://github.com/meshmy/meshtastic-firmware"><b>meshtastic-firmware</b></a><br /><sub>Meshtastic device firmware</sub><br /><sub>last org activity: 2026-09-02</sub></li>
+        <li><a href="https://github.com/meshmy/meshtastic-firmware"><b>meshtastic-firmware</b></a><br /><sub>Meshtastic device firmware</sub><br /><sub>last org activity: 2026-09-03</sub></li>
         <li><a href="https://github.com/meshmy/meshtastic-web-flasher"><b>meshtastic-web-flasher</b></a><br /><sub>Official online flasher for Meshtastic device firmware</sub><br /><sub>last org activity: 2026-08-29</sub></li>
         <li><a href="https://github.com/meshmy/radiosondetastic"><b>radiosondetastic</b></a><br /><sub>we need a better name</sub><br /><sub>last org activity: 2026-08-23</sub></li>
         <li><a href="https://github.com/meshmy/meshtastic-protobufs"><b>meshtastic-protobufs</b></a><br /><sub>Protobuf definitions for the Meshtastic project</sub><br /><sub>last org activity: 2026-08-08</sub></li>
