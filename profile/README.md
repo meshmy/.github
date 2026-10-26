@@ -30,8 +30,8 @@
     <td valign="top" width="50%">
       <h3>🕒 Recently Active</h3>
       <ol>
+        <li><a href="https://github.com/meshmy/meshtastic-db"><b>meshtastic-db</b></a><br /><sub>Self-hosted TimescaleDB + Grafana ingest stack for Meshtastic mesh telemetry</sub><br /><sub>last org activity: 2026-10-26</sub></li>
         <li><a href="https://github.com/meshmy/meshmy.github.io"><b>meshmy.github.io</b></a><br /><sub>The MeshMY community website</sub><br /><sub>last org activity: 2026-09-25</sub></li>
-        <li><a href="https://github.com/meshmy/meshtastic-db"><b>meshtastic-db</b></a><br /><sub>Self-hosted TimescaleDB + Grafana ingest stack for Meshtastic mesh telemetry</sub><br /><sub>last org activity: 2026-09-24</sub></li>
         <li><a href="https://github.com/meshmy/meshtastic-firmware"><b>meshtastic-firmware</b></a><br /><sub>Meshtastic device firmware</sub><br /><sub>last org activity: 2026-09-03</sub></li>
         <li><a href="https://github.com/meshmy/meshtastic-docs"><b>meshtastic-docs</b></a><br /><sub>Meshtastic project website and documentation</sub><br /><sub>last org activity: 2026-08-31</sub></li>
         <li><a href="https://github.com/meshmy/meshtastic-web-flasher"><b>meshtastic-web-flasher</b></a><br /><sub>Official online flasher for Meshtastic device firmware</sub><br /><sub>last org activity: 2026-08-29</sub></li>
